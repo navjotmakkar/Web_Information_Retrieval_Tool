@@ -9,6 +9,7 @@ import crawler.Crawler;
 import crawler.Dictionary;
 import crawler.URLValidation;
 import searchhistory.SearchHistory;
+import FrequencyCounter.FrequencyCounter;
 import spellCheck.SpellCheck;
 import spellCheck.TST;
 
@@ -104,7 +105,8 @@ public class SearchEngine {
 		System.out.print("\n\nWhat would you like to do next?\n\n");
 		System.out.println("1. Check Spelling");
 		System.out.println("2. Check Suggestion");
-		System.out.println("3. Show history\n");
+		System.out.println("3. Frequency Count");
+		System.out.println("4. Show history\n");
 		System.out.print("Enter Exit to exit. \n\n");
 		System.out.println("So what do you want to do? ");
 		SearchHistory history = new SearchHistory(5);
@@ -119,6 +121,7 @@ public class SearchEngine {
 				// Input from user
 				System.out.print("Enter a word to check it's spelling: ");
 				query = sc.nextLine();
+				//Storing to history
 				history.addSearch(query);
 				SpellCheck suggestSpelling = new SpellCheck();
 
@@ -130,12 +133,23 @@ public class SearchEngine {
 				// Input from user
 				System.out.print("Enter a word to get it's suggestion: ");
 				query = sc.nextLine();
+				//Storing to history
 				history.addSearch(query);
 				// Call method for get suggestions
 				TST.suggestion(query);
 				break;
-
+			
 			case "3":
+				System.out.println("Enter a word to count it's frequency : ");
+				query = sc.nextLine();
+				FrequencyCounter countFreq = new FrequencyCounter();
+				//Storing to history
+				history.addSearch(query);
+				// Call method for frequency Counter
+				countFreq.countWords(query);
+				break;
+
+			case "4":
 				//Calling function to display history
 				// Prints the title of the most recent entry
 				history.printHistory();
@@ -149,7 +163,8 @@ public class SearchEngine {
 			System.out.print("\n\nWhat would you like to do next?\n\n");
 			System.out.println("1. Check Spelling");
 			System.out.println("2. Check Suggestion");
-			System.out.println("3. Show history\n");
+			System.out.println("3. Frequency Count");
+			System.out.println("4. Show history\n");
 			System.out.print("Enter Exit to exit. \n\n");
 			System.out.println("So what do you want to do? ");
 			input = sc.nextLine();
