@@ -15,9 +15,15 @@ import spellCheck.SpellCheck;
 import spellCheck.TST;
 
 
+/**
+ * Main class to start the web search engine
+ * @author Navjot Makkar, Akshit Bhatia, 
+ * Gagan Singh Golar and Utsav Krishnakumar
+ *
+ */
 public class SearchEngine {
 
-	public static final int maxCrawlLimit = 10, systemDelay = 500;
+	public static final int maxCrawlLimit = 10;
 	static SearchHistory history = new SearchHistory(5);
 
 	public static void startCrawlerParser(String webPageURL) throws Exception {
@@ -76,6 +82,16 @@ public class SearchEngine {
 	}
 
 	public static void main(String[] args) throws Exception {
+		System.out.println("******************************"+ 
+							"\nWelcome to Web Search Engine"+
+							"\nDeveloped by-"+
+							"\n Akshit Bhatia"+
+							"\n Gagan Singh Golar"+
+							"\n Navjot Makkar"+
+							"\n Utsav Krishnakumar"+
+							"\n******************************"
+							);
+		
 		String websiteURL;
 		
 		try (Scanner scn = new Scanner(System.in)) {
@@ -173,13 +189,13 @@ public class SearchEngine {
 				history.printHistory();
 				break;
 			case "6":
+				System.out.println("Thank you!");
+				sc.close();
 				System.exit(0);
 			default:
 				System.out.println("Please enter a valid input");
 			}
 
-			// Loop process till user exits
-			Thread.sleep(systemDelay);
 			otherFunctionality();
 		}
 //	}

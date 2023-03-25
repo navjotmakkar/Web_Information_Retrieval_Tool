@@ -38,6 +38,7 @@ public class SpellCheck {
 
 			// to store all the words
 			ArrayList<String> dict = new ArrayList<String>();
+			
 
 			String data;
 			// adding all the words in dictionary file to dictionary array list

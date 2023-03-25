@@ -59,9 +59,8 @@ public class Dictionary {
 			FileWriter fw = new FileWriter("dictionary.txt");
 			//Iterating through each word in the dictionary list
 			for (String word : dict)
-				if(!word.isEmpty())
 				//write word by word in the file
-					fw.write(word + System.lineSeparator());
+				fw.write(word + System.lineSeparator());
 			fw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
