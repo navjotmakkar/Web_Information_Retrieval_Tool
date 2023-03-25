@@ -9,13 +9,16 @@ import crawler.Crawler;
 import crawler.Dictionary;
 import crawler.URLValidation;
 import searchhistory.SearchHistory;
+import searchWord.pageRanking;
 import FrequencyCounter.FrequencyCounter;
 import spellCheck.SpellCheck;
 import spellCheck.TST;
 
+
 public class SearchEngine {
 
-	public static final int maxCrawlLimit = 200, systemDelay = 500;
+	public static final int maxCrawlLimit = 10, systemDelay = 500;
+	static SearchHistory history = new SearchHistory(5);
 
 	public static void startCrawlerParser(String webPageURL) throws Exception {
 		Crawler crawler = new Crawler();
@@ -26,7 +29,7 @@ public class SearchEngine {
 		// create DIctionary from txt files
 		Dictionary dictionary = new Dictionary();
 		dictionary.createDictionary();
-		System.out.println("\nDictionary created at: ./dictionary.txt");
+		System.out.println("\nDictionary created from the text files");
 	}
 
 	/**
@@ -103,21 +106,36 @@ public class SearchEngine {
 		String input = null;
 		String query = null;
 		System.out.print("\n\nWhat would you like to do next?\n\n");
-		System.out.println("1. Check Spelling");
-		System.out.println("2. Check Suggestion");
-		System.out.println("3. Frequency Count");
-		System.out.println("4. Show history\n");
-		System.out.print("Enter Exit to exit. \n\n");
+		System.out.println("1. Search Word");
+		System.out.println("2. Check Spelling");
+		System.out.println("3. Check Suggestion");
+		System.out.println("4. Frequency Count");
+		System.out.println("5. Show history");
+		System.out.println("6. Exit from search engine \n");
 		System.out.println("So what do you want to do? ");
-		SearchHistory history = new SearchHistory(5);
+		
 		
 		Scanner sc = new Scanner(System.in);
 		input = sc.nextLine();
 
-		while (!input.toLowerCase().equals("exit")) {
+//		while (!input.toLowerCase().equals("exit")) {
 			switch (input) {
-
 			case "1":
+				// Input from user
+				System.out.print("Enter something to search: ");
+				query = sc.nextLine();
+				pageRanking search = new pageRanking();
+				//Storing to history
+				history.addSearch(query);
+				// Call method for searching 
+				try {
+					search.rankPages(query.toLowerCase());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case "2":
 				// Input from user
 				System.out.print("Enter a word to check it's spelling: ");
 				query = sc.nextLine();
@@ -129,7 +147,7 @@ public class SearchEngine {
 				suggestSpelling.checkSpelling(query.toLowerCase());
 				break;
 
-			case "2":
+			case "3":
 				// Input from user
 				System.out.print("Enter a word to get it's suggestion: ");
 				query = sc.nextLine();
@@ -139,7 +157,7 @@ public class SearchEngine {
 				TST.suggestion(query);
 				break;
 			
-			case "3":
+			case "4":
 				System.out.println("Enter a word to count it's frequency : ");
 				query = sc.nextLine();
 				FrequencyCounter countFreq = new FrequencyCounter();
@@ -149,25 +167,20 @@ public class SearchEngine {
 				countFreq.countWords(query);
 				break;
 
-			case "4":
+			case "5":
 				//Calling function to display history
 				// Prints the title of the most recent entry
 				history.printHistory();
 				break;
+			case "6":
+				System.exit(0);
 			default:
 				System.out.println("Please enter a valid input");
 			}
 
 			// Loop process till user exits
 			Thread.sleep(systemDelay);
-			System.out.print("\n\nWhat would you like to do next?\n\n");
-			System.out.println("1. Check Spelling");
-			System.out.println("2. Check Suggestion");
-			System.out.println("3. Frequency Count");
-			System.out.println("4. Show history\n");
-			System.out.print("Enter Exit to exit. \n\n");
-			System.out.println("So what do you want to do? ");
-			input = sc.nextLine();
+			otherFunctionality();
 		}
-	}
+//	}
 }

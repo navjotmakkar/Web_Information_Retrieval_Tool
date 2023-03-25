@@ -40,7 +40,7 @@ public class FrequencyCounter {
 					}
 					bufferReader.close();
 					System.out.println(" \nFile_Name : " + flist[i].getName() 
-							+ "\nWord_Frequency : " + wordCount + "\n");
+							+ " | Word_Frequency : " + wordCount );
 				}
 			}
 		} catch (IOException error) {
