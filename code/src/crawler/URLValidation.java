@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class URLValidation {
 
 	public static final String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-
+	
 	/**
 	 * Validate the given url with the regex
 	 * 
