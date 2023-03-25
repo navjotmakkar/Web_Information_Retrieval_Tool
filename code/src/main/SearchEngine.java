@@ -1,16 +1,19 @@
 package main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 import crawler.Crawler;
 import crawler.Dictionary;
 import crawler.URLValidation;
+import spellCheck.SpellCheck;
+import spellCheck.TST;
 
 public class SearchEngine {
 
-	public static final int maxCrawlLimit = 200;
+	public static final int maxCrawlLimit = 200, systemDelay = 500;
 
 	public static void startCrawlerParser(String webPageURL) throws Exception {
 		Crawler crawler = new Crawler();
@@ -26,7 +29,6 @@ public class SearchEngine {
 
 	/**
 	 * Method to delete existing data from file system
-	 * 
 	 */
 	public static void checkDirAndFiles() {
 		File htmlDir = new File("HTMLFiles/");
@@ -66,7 +68,6 @@ public class SearchEngine {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -90,6 +91,58 @@ public class SearchEngine {
 
 			// Start crawler, html parsing and dictionary creation
 			startCrawlerParser(websiteURL);
+			
+			// Continue the code
+			otherFunctionality();
+		}
+	}
+
+	private static void otherFunctionality() throws FileNotFoundException, IOException, InterruptedException {
+		String input = null;
+		String query = null;
+		System.out.print("\n\nWhat would you like to do next?\n\n");
+		System.out.println("1. Check Spelling");
+		System.out.println("2. Check Suggestion");
+		System.out.print("Enter Exit to exit. \n\n");
+		System.out.println("So what do you want to do? ");
+		
+		Scanner sc = new Scanner(System.in);
+		input = sc.nextLine();
+
+		while (!input.toLowerCase().equals("exit")) {
+			switch (input) {
+
+			case "1":
+				// Input from user
+				System.out.print("Enter a word to check it's spelling: ");
+				query = sc.nextLine();
+				SpellCheck suggestSpelling = new SpellCheck();
+
+				// Call method for spell-check
+				suggestSpelling.checkSpelling(query.toLowerCase());
+				break;
+
+			case "2":
+				// Input from user
+				System.out.print("Enter a word to get it's suggestion: ");
+				query = sc.nextLine();
+				
+				// Call method for get suggestions
+				TST.suggestion(query);
+				break;
+
+			default:
+				System.out.println("Please enter a valid input");
+			}
+
+			// Loop process till user exits
+			Thread.sleep(systemDelay);
+			System.out.print("\n\nWhat would you like to do next?\n\n");
+			System.out.println("1. Check Spelling");
+			System.out.println("2. Check Suggestion");
+			System.out.print("Enter Exit to exit. \n\n");
+			System.out.println("So what do you want to do? ");
+			input = sc.nextLine();
 		}
 	}
 }
