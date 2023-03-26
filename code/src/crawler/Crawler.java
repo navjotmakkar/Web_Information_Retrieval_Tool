@@ -40,8 +40,6 @@ public class Crawler {
 		// count of skipped URLS
 		int numDuplicateURLs = 0, numInvalidURLs = 0;
 
-		System.out.println("Crawling the website: " + websiteUrl);
-
 		// Add the webpage URL to the websiteUrlList list
 		webpageUrlQueue.add(websiteUrl);
 		
@@ -142,9 +140,11 @@ public class Crawler {
 	public String convertHtmlToText(String fname) throws IOException {
 		String currDirPath = System.getProperty("user.dir");
 		String htmlFilePath = currDirPath + "\\HTMLFiles\\" + fname;
+		
 		//reading the file content and setting encoding 
 		byte[] htmlContentBytes = Files.readAllBytes(Paths.get(htmlFilePath));
 		Charset charEncoding = StandardCharsets.US_ASCII;
+		
 		//Parsing html content through jsoup and returning the text
 		String htmlFileContent = new String(htmlContentBytes, charEncoding);
 		Document jsoupDocObj = Jsoup.parse(htmlFileContent);
@@ -161,7 +161,7 @@ public class Crawler {
 	public void saveTextFile(String fName, String fContent) {
 		FileWriter fw;
 		try {
-			//c freating the file writer object with proper filename
+			//creating the file writer object with proper filename
 			fw = new FileWriter(
 					"TextFiles/" + fName.substring(0, fName.lastIndexOf(".")) + ".txt");
 			//writing to the txt file
@@ -170,6 +170,5 @@ public class Crawler {
 		} catch (IOException e) {
 			System.out.println("Error while saving text file for "+ fName);
 		}
-		
 	}
 }

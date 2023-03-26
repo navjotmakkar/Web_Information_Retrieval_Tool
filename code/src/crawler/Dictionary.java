@@ -22,7 +22,6 @@ public class Dictionary {
 	HashSet<String> stopWords = new HashSet<>(Arrays.asList("a", "an", "and", "are", "as", "at", "be", "by", "for",
 			"from", "has", "he", "in", "is", "it", "its", "of", "on", "that", "the", "to", "was", "were", "she",
 			"there", "them"));
-
 	/**
 	 * Create dictionary file from all the text files present in the directory
 	 * 
@@ -30,22 +29,16 @@ public class Dictionary {
 	public void createDictionary() {
 		// Getting all files from the directory
 		File[] files = new File("TextFiles/").listFiles();
-		
 		// Initializing dictionary as list of strings
 		ArrayList<String> dict = new ArrayList<String>();
-
 		// Initializing Set to store all unique words
 		Set<String> uniqueWordSet = new HashSet<>();
-
 		//Iterate through all files and add words to the set object
 		createUniqueWordSet(files, uniqueWordSet);
-		
 		// Adding the words to the dictionary list
 		dict.addAll(uniqueWordSet);
-		
 		// Sorting the list
 		Collections.sort(dict);
-		
 		//Save the list to the file in the disk
 		saveDictToFile(dict);
 	}
@@ -84,7 +77,7 @@ public class Dictionary {
 							// Remove non-alphabetic characters and adding it to the set
 							String word = scan.next().replaceAll("[^A-Za-z ]", "").toLowerCase();
 							// Adding the word to the dictionary if it is not a stop-word.
-							if (!stopWords.contains(word.toLowerCase()))
+							if (!word.isEmpty() && !stopWords.contains(word.toLowerCase()))
 								uniqueWordSet.add(word);
 						}
 					}
