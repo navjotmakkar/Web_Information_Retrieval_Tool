@@ -18,12 +18,12 @@ import spellCheck.TST;
 /**
  * Main class to start the web search engine
  * @author Navjot Makkar, Akshit Bhatia, 
- * Gagan Singh Golar and Utsav Krishnakumar
+ * Gagan Singh Golar and Utsav Krishnatra
  *
  */
 public class SearchEngine {
 
-	public static final int maxCrawlLimit = 10;
+	public static final int maxCrawlLimit = 100;
 	static SearchHistory history = new SearchHistory(5);
 
 	public static void startCrawlerParser(String webPageURL) throws Exception {
@@ -76,8 +76,8 @@ public class SearchEngine {
 
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error occured while checking if directories "
+					+ "already exists- "+e.getMessage());
 		}
 	}
 
@@ -88,7 +88,7 @@ public class SearchEngine {
 							"\n Akshit Bhatia"+
 							"\n Gagan Singh Golar"+
 							"\n Navjot Makkar"+
-							"\n Utsav Krishnakumar"+
+							"\n Utsav Krishnatra"+
 							"\n******************************"
 							);
 		
