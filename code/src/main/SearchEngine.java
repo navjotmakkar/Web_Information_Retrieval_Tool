@@ -23,7 +23,7 @@ import spellCheck.TST;
  */
 public class SearchEngine {
 
-	public static final int maxCrawlLimit = 10;
+	public static final int maxCrawlLimit = 100;
 	static SearchHistory history = new SearchHistory(5);
 
 	public static void startCrawlerParser(String webPageURL) throws Exception {
